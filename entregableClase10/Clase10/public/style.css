@@ -1,0 +1,9 @@
+.titulo{
+    width: 100%;
+    text-align: center;
+}
+.formulario{
+    width: 80%;
+    margin: auto;
+    border: 2px solid black;
+}

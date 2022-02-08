@@ -1,0 +1,19 @@
+extends ./layouts/index.pug
+block body
+    h1(style="color:blue;") Datos 
+    if(hayProductos)
+        div(class="table-responsive")
+            table(class="table table-dark")
+                tr
+                    th='Nombre'
+                    th='Precio'
+                    th='Foto'
+                    each producto of productos
+                        tr
+                            td=producto.title
+                            td=producto.price
+                            td
+                                img(src=producto.thumbnail alt='not found')
+    else
+        h3(class="alert alert-warning")='No hay productos'
+    a(href="./static" type="button")="volver"

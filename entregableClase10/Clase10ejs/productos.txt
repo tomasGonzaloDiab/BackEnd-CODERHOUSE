@@ -1,0 +1,1 @@
+[{"name":"pedro","id":1},{"title":"boligoma","price":50,"thumbnail":"boligoma-50","id":2}]
