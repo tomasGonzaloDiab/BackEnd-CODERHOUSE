@@ -95,7 +95,7 @@ routerCarrito.delete("/:id", (req, res) => {
   cart.splice(prodID -1, 1)
   //este for lo que hace es actualizar el id de los carritos posteriores al eliminado
   for(let i=parseInt(prodID)-1; i<cart.length;i++){
-    cart[i].id=i+1}
+    cart[i][0].id=i+1}
   fs.writeFileSync("./productosCarrito.txt", JSON.stringify(cart));
   res.send(cart);
 });
