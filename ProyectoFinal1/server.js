@@ -24,18 +24,12 @@ app.engine('hbs', handlebars.engine({
 
 routerProductos.get('/:id?' ,(req, res) => {
     const prods = productos
-    if(req.params && req.params.id<=prods.length){
-        res.render("vistaProducto", {
-            productos: prods[req.params.id-1],
-            hayProductos: 1,
-        });
+    if(req.params && req.params.id<=prods.length){ 
+        res.send(prods[req.params.id-1])
     }else if(req.params.id>prods.length){
         res.send("no se encontro el producto")
-    }  else {
-        res.render("vistaProductos", {
-            productos: prods,
-            hayProductos: prods.length,
-        });
+    }  else {   
+        res.send(prods)
     }
 });
 
@@ -46,21 +40,44 @@ routerProductos.post("/", (req, res) => {
         newProducto.timeStamp = Date.now();
         productos.push(newProducto);
         fs.writeFileSync("./productos.txt", JSON.stringify(productos));
-        res.redirect("/api/productos")              
+        res.send(productos)             
     }else{
         res.send("no tiene derecho de administrador")
     }
-  });
-routerProductos.put('/:id', (req,res)=>{
-        const newProduct = req.body
-        newProduct.id = req.params.id
-        newProduct.timeStamp = Date.now();
-        productos[req.params.id-1] = newProduct
+});
 
-        fs.writeFileSync("./productos.txt", JSON.stringify(productos));
-        res.send(productos)
-    
+routerProductos.put('/:id', (req,res)=>{
+  if(administrador){
+    const newProduct = req.body
+    newProduct.id = req.params.id
+    newProduct.timeStamp = Date.now();
+    //todas estas comparaciones son para saber que tiene mi producto nuevo, asi reemplazar los nuevos datos y dejar los ya existentes
+    if(newProduct.nombre!=null){
+      productos[req.params.id-1].nombre = newProduct.nombre
+    }
+    if(newProduct.precio!=null){
+      productos[req.params.id-1].precio = newProduct.precio
+    }
+    if(newProduct.stock!=null){
+      productos[req.params.id-1].stock = newProduct.stock
+    }
+    if(newProduct.foto!=null){
+      productos[req.params.id-1].foto = newProduct.foto
+    }
+    if(newProduct.codigo!=null){
+      productos[req.params.id-1].codigo = newProduct.codigo
+    }
+    if(newProduct.descripcion!=null){
+      productos[req.params.id-1].descripcion = newProduct.descripcion
+    }
+    productos[req.params.id-1].timeStamp = newProduct.timeStamp
+    fs.writeFileSync("./productos.txt", JSON.stringify(productos));
+    res.send(productos[req.params.id-1])
+  }else{
+    res.send("no tiene derecho de administrador")
+}
 })
+
 routerProductos.delete('/:id', (req,res)=>{
     if(administrador){
         productos.splice(req.params.id-1,1)
@@ -80,13 +97,16 @@ routerProductos.delete('/:id', (req,res)=>{
 routerCarrito.post("/", (req, res) => {
     const newCart = [];
     let totalCart = new Object();
-    totalCart.productos = req.body;
     totalCart.id = cart.length + 1;
-    totalCart.timeStamp = Date.now();
+    totalCart.timeStamp = Date.now()
+    totalCart.productos = req.body;
+    totalCart.productos.timeStamp = Date.now()
+    totalCart.productos.id = 1
     newCart.push(totalCart);
     cart.push(newCart);
-    fs.writeFileSync("./productosCarrito.txt", JSON.stringify(cart));
-    res.send(cart);
+    fs.writeFileSync("./productosCarrito.txt", JSON.stringify(cart)); 
+    const id = cart[cart.length-1][0].id
+    res.send({id});
 });
 
 //METODO DELETE
@@ -104,15 +124,9 @@ routerCarrito.get("/:id/productos", (req, res) => {
   let prodID = req.params.id;
   const prodEnId = cart[prodID - 1];
   if (req.params && req.params.id <= cart.length) {
-    res.render("vistaProductos", {
-      productos: prodEnId,
-      hayProductos: cart.length,
-    });
+    res.send(prodEnId)
   } else {
-    res.render("vistaProducto", {
-      productos: prodEnId,
-      hayProductos: cart.length,
-    });
+    res.send("no existe")
   }
 });
 //METODO POST CON PROD
@@ -123,6 +137,7 @@ routerCarrito.post("/:id/productos", (req, res) => {
     const newProd = req.body;
     const id = carrito[prodID - 1];
     newProd.id = id.length +1;
+    newProd.timeStamp= Date.now();
     carrito[prodID - 1].push(newProd);
     fs.writeFileSync("./productosCarrito.txt", JSON.stringify(carrito));
     const prodEnId = carrito[prodID - 1];
@@ -133,14 +148,15 @@ routerCarrito.delete("/:id/productos/:id_prod", (req, res) => {
   let cartID = req.params.id; //id del carrito
   let itemToDelete = cart[cartID - 1]; //variable auxiliar para acceder al tamaño del array de mi carrito
   let prodID = req.params.id_prod;
-  itemToDelete.splice(prodID - 1, 1); //elimino el producto
+  itemToDelete.splice(prodID-1, 1); //elimino el producto
+
   //recorro mi variable auxiliar para actualizar los id de mis productos
   for(let i=parseInt(prodID)-1; i<itemToDelete.length;i++){
     itemToDelete[i].id=i+1
   }
   cart[cartID - 1] = itemToDelete; //actualizo mi carrito y se sobrescribe
   fs.writeFileSync("./productosCarrito.txt", JSON.stringify(cart));
-  res.send(cart[cartID - 1]);
+   res.send(cart[cartID - 1]);
 });
 
 
