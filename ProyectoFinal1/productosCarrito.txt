@@ -1,1 +1,1 @@
-[]
+[[{"id":1,"timeStamp":1646964044102,"productos":{"nombre":"alfombra ","stock":"25","precio":"222","foto":"fotoDeMesa","timeStamp":1646964044102,"id":1}}]]
