@@ -100,11 +100,11 @@ function generarProductosFk(cantidad) {
 }
 prodFaker.use("/", (req, res) => {
   let prods = generarProductosFk(5);
-  /*   prods.forEach((prod) => {
+    prods.forEach((prod) => {
     res.render("productos", {
       productos: prods,
       hayProductos: prods.length,
     });
-  }); */
+  });
   res.json(prods);
 });
