@@ -15,6 +15,9 @@ const httpServer = new HttpServer(app);
 const io = new Socket(httpServer);
 const productosApi = new ContenedorMemoria();
 const mensajesApi = new ContenedorArchivo();
+
+const info = require("./routers/web/info.js")
+
 //--normalizr
 function print(objeto) {
   console.log(util.inspect(objeto, false, 12, true));
@@ -64,6 +67,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use("/api/productos-test", prodFaker);
 
+app.use(info)
+
 app.set('views','../views')
 app.set('view engine','hbs')
 
@@ -71,6 +76,13 @@ app.engine('hbs', handlebars.engine({
   extname: '.hbs',
   defaultLayout: 'index.hbs'
 }))
+
+const hola = "hola"
+app.get("/", (req,res)=>{
+  res.render("home".{
+    hola:hola
+  })
+})
 
 const PORT = 8080;
 const connectedServer = httpServer.listen(PORT, () => {

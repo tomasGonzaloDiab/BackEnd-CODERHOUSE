@@ -2,32 +2,29 @@ const {Router} = require("express");
 const info = new Router();
 
 
-/* Argumentos de entrada                                       - Path de ejecución
-- Nombre de la plataforma (sistema operativo)       - Process id
-- Versión de node.js                                               - Carpeta del proyecto
-- Memoria total reservada (rss) */
+const { cpus } = require("os");
 
+
+const argumentosEntrada = process.argv;
+const pathEjec = process.cwd();
+const nomPlataforma = process.platform;
+const proccesId = process.pid;
+const vNode = process.version;
+const carpetaProyecto = process.cwd();
+const memReservada = process.memoryUsage();
 
 
 info.get("/info", (req, res) => {
 
-    let prods = generarProductosFk(5);
-      prods.forEach((prod) => {
-      res.render("productos", {
-        productos: prods,
-        hayProductos: prods.length,
-      });
-    });
-    res.json(prods);
-
-    res.render("info",{
-        argsEntrada: argsEntrada,
+    res.render("info.hbs",{
+        argumentosEntrada: argumentosEntrada,
         nomPlataforma: nomPlataforma,
         vNode: vNode,
         memReservada: memReservada,
         pathEjec: pathEjec,
-        proccesId: proccesIdm,
+        proccesId: proccesId,
         carpetaProyecto: carpetaProyecto
-
     })
   });
+
+module.exports = info
