@@ -22,7 +22,9 @@ productsRouter.put('/:id', async (req, res) => {
   res.json(await productsDao.update(req.params.id, req.body))
 })
 
-productsRouter.delete('/', async (req, res) => {
+productsRouter.delete('/', async (req, res) =>
+
+{
   res.json(await productsDao.deleteAll())
 })
 

@@ -7,7 +7,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-
+let id =1
 export default class FirebaseContainer {
   constructor(collectionName) {
     this.coleccion = db.collection(collectionName);
@@ -15,8 +15,11 @@ export default class FirebaseContainer {
 
   async list(id) {
     try {
+      let newid=id
+      
       const doc = await this.coleccion.doc(id).get();
-      if (!doc.exists) {
+      console.log(doc.data())
+      if (doc.id != id) {
         throw new Error(`Error al listar por id: no se encontró`);
       } else {
         const data = doc.data();
@@ -42,6 +45,8 @@ export default class FirebaseContainer {
 
   async save(newElement) {
     newElement.timestamp = moment(new Date()).format('DD/MM/YY HH:mm');
+    newElement.id = id
+    id++
     try {
       const doc = await this.coleccion.add(newElement);
       return { ...newElement, id: doc.id };
@@ -80,5 +85,4 @@ export default class FirebaseContainer {
       throw new Error(`Error al borrar: ${error}`)
     }
   }
-
 }
