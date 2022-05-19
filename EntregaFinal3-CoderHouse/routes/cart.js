@@ -8,14 +8,13 @@ const { Router } = require('express')
 const path = require('path')
 const ContenedorCartMongoDB = require('../contenedores/cart/cartMongoDB.js')
 const { client, transporter } = require('../public/js/msjCarrito.js')
-const webAuth = require('../public/auth/index.js')
 
 
 const cartRout = new Router();
 const carts = new ContenedorCartMongoDB();
 const TEST_MAIL = "tomasdiab@gmail.com";
 
-cartRout.get("/cart", webAuth, async (req, res) => {
+cartRout.get("/cart", async (req, res) => {
   const cartTotal = await carts.listAll();
   console.log(cartTotal);
   res.render(path.join(process.cwd(), "/public/views/pages/cart.ejs"), {

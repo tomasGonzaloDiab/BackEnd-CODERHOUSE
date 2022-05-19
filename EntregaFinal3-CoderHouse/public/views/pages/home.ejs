@@ -13,8 +13,7 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
-    <script src="sweetalert2.all.min.js"></script>
-
+    <script src="../../../routes/home.js"></script>
   </head>
 
   <body>
@@ -55,8 +54,8 @@
     <br />
     <% if(hayProductos){ %>
       <%productos.forEach(function(producto) {%>
-    <form action="/productos" method="post">
-      <div class="card" style="width: 18rem;">
+    <form action="/productos/<%=producto.nombre%>" method="post">
+      <div class="card" id="cards" style="width: 18rem;">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Nombre del productos: <%=producto.nombre%></h5>
@@ -67,9 +66,7 @@
               <li name="precio">Precio del productos: <%=producto.precio%></li>
             </ul>
           </p>
-
-          <button type="submit" class="btn btn-primary" id="buttonToCart"
-          >
+          <button type="submit" class="btn btn-primary " id="buttonToCart" onclick="retornarNombre(producto.nombre)">
             Agregar al carrito
           </button>
       ;
@@ -80,5 +77,6 @@
         <% } %>
       </div>
     </form>
+    <script src="./index.js"></script>
   </body>
 </html>

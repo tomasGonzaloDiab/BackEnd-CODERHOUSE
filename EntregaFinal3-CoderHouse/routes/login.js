@@ -43,7 +43,7 @@ import path from "path"; */
 const { Router } = require('express')
 const path = require('path')
 const passport = require('../public/js/passport.js')
-const webAuth = require('../public/auth/index.js')
+
 
 
 
