@@ -1,9 +1,3 @@
-/* import passport from "passport";
-import LocalStrategy from "passport-local";
-import ContenedorMongoDB from "../../contenedores/user/mongoFunctions.js";
-import bcryptjs from "bcryptjs";
- */
-
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const ContenedorMongoDB = require('../../contenedores/user/mongoFunctions.js');
@@ -29,35 +23,6 @@ const transporter = createTransport({
 
 
 
-
-/* passport.use(
-  "register",
-  new LocalStrategy(
-    {
-      usernameField: "email",
-      passwordField: "contraseña",
-      passReqToCallback: true,
-    },
-    async (req, email, contraseña, done) => {
-      const user = await User.findUser({ email: email });
-      console.log(user);
-      if (user>0) {
-        return done(
-          null,
-          false,
-          req.flash("signupMessage", "The Email is already Taken.")
-        );
-      } else {
-        const newUser = new ContenedorMongoDB();
-        newUser.email = email;
-        newUser.password = newUser.encryptPassword(contraseña);
-        console.log(newUser);
-        await newUser.save();
-        done(null, newUser);
-      }
-    }
-  )
-); */
 function checkAutentication(req,res,next){
   if(req.isAuthenticated()){
     next()
@@ -130,7 +95,6 @@ passport.use(
     },
     async (req, email, contraseña, done) => {
       const userBuscado = await User.findUser( email );
-      console.log(userBuscado)
       if (userBuscado.length<1) {
         console.log("NO ESTA!!!");
         return done(null, false, console.log("usuario incorrecto"));
@@ -148,7 +112,7 @@ passport.use(
 
 passport.serializeUser((userBuscado, done) => {
 /*   console.log(userBuscado)
- */  done(null, userBuscado[0].id);
+ */  done(null, {id:userBuscado[0].id});
 });
 
 passport.deserializeUser( async(email, done) => {
@@ -158,6 +122,4 @@ passport.deserializeUser( async(email, done) => {
 });
 
 
-/* export default passport;
- */
 module.exports = passport

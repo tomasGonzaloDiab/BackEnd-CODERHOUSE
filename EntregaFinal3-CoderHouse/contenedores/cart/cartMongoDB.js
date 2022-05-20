@@ -1,5 +1,4 @@
-/* import cart from "./schemaCartMongoDB.js";
- */
+
 const cart = require('./schemaCartMongoDB.js')
 
 
@@ -50,6 +49,5 @@ class ContenedorCartMongoDB {
   } */
 }
 
-/* export default ContenedorCartMongoDB; */
 
 module.exports =ContenedorCartMongoDB

@@ -1,6 +1,4 @@
-/* import Joi from "joi";
-import  mongodb  from "../../config/config.js";
-import mongoose from "mongoose"; */
+
 
 const Joi = require('Joi')
 const mongodb = require("../../config/config.js")
@@ -26,5 +24,4 @@ const usersSchema = {
   id
 };
 const users = mongoose.model("users", usersSchema);
-/* export default users */
 module.exports= users

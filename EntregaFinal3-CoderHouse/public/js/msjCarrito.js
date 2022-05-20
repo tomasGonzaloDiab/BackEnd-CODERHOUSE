@@ -1,8 +1,4 @@
-/* import twilio from "twilio";
-import { createTransport } from "nodemailer";
 
-import dotenv from "dotenv";
- */
 const dotenv = require('dotenv')
 const { createTransport } = require('nodemailer')
 const twilio = require('twilio')

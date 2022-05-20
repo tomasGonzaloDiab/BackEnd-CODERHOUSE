@@ -1,9 +1,4 @@
-/* import { Router } from "express";
-import path from "path";
-import ContenedorProdMongoDB from "../contenedores/products/productsMongoDB.js";
-import ContenedorCartMongoDB from "../contenedores/cart/cartMongoDB.js";
-import webAuth from "../public/auth/index.js";
- */
+
 const { Router } = require('express')
 const path = require('path')
 const ContenedorProdMongoDB = require('../contenedores/products/productsMongoDB.js')
@@ -18,16 +13,10 @@ const carts = new ContenedorCartMongoDB()
 
 
 
-/* function checkAutentication(req,res,next){
-  if(req.isAuthenticated()){
-    next()
-  } else{
-    res.redirect("/login")
-  }
-}
- */
+
 
 homeRouter.get("/home", async (req, res) => {
+  console.log(req.sesion)
   const listaProductos = await productos.listAll();
   res.render(path.join(process.cwd(), "/public/views/pages/home.ejs"), {
     productos: listaProductos,
@@ -57,30 +46,6 @@ homeRouter.post("/home", async (req, res) => {
   res.send(producto);
 });
 
-/*  function  agregarCarrito (id,nombre,precio){
-   const listaProductos = await productos.listAll();
-
- 
-  return productoAñadir */
-/*   const carrito = await carts.listAll();
-  if (carrito.length === 0) {
-    const newElement = {};
-    await carts.crear(newElement);
-    console.log("Cart creado");
-  } else {
-    console.log("ya tenes un carrito");
-  }
-  const listaCarrito = await carts.listAll();
-  //HASTA ACA CREA EL CARRITO, O VERIFICA SI NO TENES UNO.
-  const listaProductos = await productos.listAll(); */
-  
-
-/*   const productoAñadir = listaProductos.find((e) => e.id ==id); 
-  listaCarrito[0].productos.push(productoAñadir);
-  const cartActualizado = await carts.update(
-    listaCarrito[0].id,
-    listaCarrito[0]
-  ); */
 
 
   function retornarNombre(nombre){

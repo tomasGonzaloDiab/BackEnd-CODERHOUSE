@@ -1,4 +1,3 @@
-/* import users from './schemaUsersMongoDB.js' */
 
 const users = require('./schemaUsersMongoDB.js')
 
@@ -29,6 +28,5 @@ class ContenedorMongoDB{
 
 }
 
-/* export default ContenedorMongoDB */
 
 module.exports = ContenedorMongoDB;

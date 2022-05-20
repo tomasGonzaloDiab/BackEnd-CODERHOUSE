@@ -1,5 +1,4 @@
-/* import products from "./schemaProdMongoDB.js";
- */
+
 const products = require("./schemaProdMongoDB.js")
 
 class ContenedorProdMongoDB {
@@ -29,6 +28,5 @@ class ContenedorProdMongoDB {
   }
 }
 
-/* export default ContenedorProdMongoDB; */
 
 module.exports = ContenedorProdMongoDB

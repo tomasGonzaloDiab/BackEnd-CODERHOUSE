@@ -1,6 +1,4 @@
-/* import { Router } from "express";
-import path from "path";
- */
+
 const { Router } = require('express')
 const path = require('path')
 
@@ -17,6 +15,5 @@ logout.get("/logout", (req, res) => {
   }
 });
 
-/* export default logout;
- */
+
 module.exports = logout
