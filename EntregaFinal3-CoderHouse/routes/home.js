@@ -3,6 +3,7 @@ const { Router } = require('express')
 const path = require('path')
 const ContenedorProdMongoDB = require('../contenedores/products/productsMongoDB.js')
 const ContenedorCartMongoDB = require('../contenedores/cart/cartMongoDB.js')
+const {checkAutentication} = require('../public/js/passport.js')
 
 
 
@@ -15,7 +16,7 @@ const carts = new ContenedorCartMongoDB()
 
 
 
-homeRouter.get("/home", async (req, res) => {
+homeRouter.get("/home", checkAutentication, async (req, res) => {
   console.log(req.sesion)
   const listaProductos = await productos.listAll();
   res.render(path.join(process.cwd(), "/public/views/pages/home.ejs"), {

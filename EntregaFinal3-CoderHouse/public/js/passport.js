@@ -5,8 +5,6 @@ const bcryptjs = require('bcryptjs');
 const { createTransport } = require('nodemailer')
 
 
-
-
 const User = new ContenedorMongoDB();
 
 const TEST_MAIL = "tomasdiab@gmail.com";
@@ -122,4 +120,4 @@ passport.deserializeUser( async(email, done) => {
 });
 
 
-module.exports = passport
+module.exports = {passport,checkAutentication}

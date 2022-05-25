@@ -7,6 +7,6 @@ function webAuth(req, res, next) {
   }
 }
 
-/* export default webAuth; */
+
 
 module.exports = webAuth

@@ -1,5 +1,9 @@
 const express = require("express");
 const Router = require("express");
+const cluster = require("cluster");
+const {cpu} = require("os");
+const {append} = require("express/lib/response");
+
 const { faker } = require("@faker-js/faker");
 const handlebars = require('express-handlebars')
 const moment = require("moment");
@@ -109,6 +113,24 @@ function generarProductosFk(cantidad) {
     productos.push(generarCombinacion());
   }
   return productos;
+}
+
+const modoCluster = process.arv[3] === "CLUSTER"
+
+if(modoCluster && cluster.isPrimary){
+  const numCPUs= cpus().length
+
+  console.log("Numero de cores: ", numCPUs)
+
+  for(let i =0; i<numCPUs; i++){
+    cluster.fork()
+  }
+  cluster.on('exit', worker => {
+    console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
+    cluster.destroy()
+})
+}else{
+  const app = express();
 }
 prodFaker.use("/", (req, res) => {
   let prods = generarProductosFk(5);

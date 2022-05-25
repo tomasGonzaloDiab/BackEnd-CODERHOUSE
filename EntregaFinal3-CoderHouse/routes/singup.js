@@ -3,7 +3,7 @@ const { Router } = require('express')
 const path = require('path')
 const ContenedorMongoDB = require('../contenedores/user/mongoFunctions.js')
 const bcryptjs = require('bcryptjs')
-const passport = require('../public/js/passport.js')
+const {passport} = require('../public/js/passport.js')
 
 
 
