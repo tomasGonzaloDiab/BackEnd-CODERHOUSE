@@ -2,8 +2,6 @@
 const cart = require('./schemaCartMongoDB.js')
 
 
-/* import moment from "moment";
- */
 let id = 0;
 class ContenedorCartMongoDB {
   constructor() {}
@@ -30,7 +28,7 @@ class ContenedorCartMongoDB {
   async update(id, newData) {
     try {
       await cart.updateOne({ id: id }, { $set: newData });
-      console.log("deberia haber actualizado");
+    
     } catch (error) {
       console.error(`Error al actualizar ${error}`);
     }

@@ -37,7 +37,6 @@ homeRouter.post("/home", async (req, res) => {
     productos.save(producto);
   }
 
-  console.log("hecho");
   res.send(producto);
 });
 
@@ -58,16 +57,14 @@ homeRouter.post("/productos/:id", async (req, res) => {
   //HASTA ACA CREA EL CARRITO, O VERIFICA SI NO TENES UNO.
   const listaProductos = await productos.listAll();
   
-  console.log(listaCarrito)
-/*   console.log(listaProductos)
- */  const producto = {
+  const producto = {
     id: req.params.id.id,
     nombre: req.params.id.nombre,
     precio: req.params.id.precio,
   };
 
   const yaExiste = listaProductos.find((e) => e._id == req.params.id);
-  console.log(yaExiste)
+
   listaCarrito[0].productos.push(yaExiste);
   const cartActualizado = await carts.update(
     listaCarrito[0].id,

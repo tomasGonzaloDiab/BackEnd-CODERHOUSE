@@ -12,7 +12,6 @@ const TEST_MAIL = "tomasdiab@gmail.com";
 
 cartRout.get("/cart", async (req, res) => {
   const cartTotal = await carts.listAll();
-  console.log(cartTotal);
   res.render(path.join(process.cwd(), "/public/views/pages/cart.ejs"), {
     productos: cartTotal[0].productos /* CHEQUEAR ESTOOOOOO */,
     hayProductos: cartTotal.length,
@@ -67,8 +66,6 @@ cartRout.post("/compra-realizada", async (req, res) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-/*     const message = await client.messages.create(options);
-   console.log(message); */
     console.log("EMAIL ENVIADO!");
   } catch (error) {
     console.log(error);

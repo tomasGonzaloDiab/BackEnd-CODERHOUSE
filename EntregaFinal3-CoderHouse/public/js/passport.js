@@ -95,13 +95,13 @@ passport.use(
       const usuarioBuscado = await User.findUser( email );
       const userBuscado = usuarioBuscado[0]
       if (userBuscado.length<1) {
-        console.log("NO ESTA!!!");
+      
         return done(null, false, console.log("usuario incorrecto"));
       }else{
         if (!bcryptjs.compareSync(contraseña, userBuscado.contraseña)){
           return done(null, false, console.log("Incorrect Password"));
         }else{
-          console.log("ESTA!!!");
+          
           return done(null, userBuscado);
         }
       }
@@ -115,7 +115,6 @@ passport.serializeUser((userBuscado, done) => {
 
 passport.deserializeUser( async(email, done) => {
   const usuario = await User.findUser({ email });
-  console.log("deserializeUser!!!");
   done(null, usuario);
 });
 
