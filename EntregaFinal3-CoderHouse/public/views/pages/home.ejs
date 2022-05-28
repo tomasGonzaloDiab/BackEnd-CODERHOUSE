@@ -11,14 +11,15 @@
       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
       crossorigin="anonymous"
     />
+
+    
     <link rel="stylesheet" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
     <script src="../../../routes/home.js"></script>
   </head>
 
   <body>
-    <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light " style="background-color: #c3e1f7;">
         <a class="navbar-brand" href="#">Ecommerce</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -46,37 +47,42 @@
           </span>
         </div>
       </nav>
-    </div>
-    <div>
-      <h3>Bienvenidos</h3>
+    <div class="fondoHome" >
+  
+    <div class="productosTitulo">
+      <h3>Nuestros productos</h3>
      
     </div>
     <br />
-    <% if(hayProductos){ %>
-      <%productos.forEach(function(producto) {%>
-    <form action="/productos/<%=producto.nombre%>" method="post">
-      <div class="card" id="cards" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Nombre del productos: <%=producto.nombre%></h5>
-          <p class="card-text">
-            <ul>
-              <li name="id">ID del productos:<%=producto._id%> </li>
-              <li name="nombre">Nombre del productos: <%=producto.nombre%></li>
-              <li name="precio">Precio del productos: <%=producto.precio%></li>
-            </ul>
-          </p>
-          <button type="submit" class="btn btn-primary " id="buttonToCart" onclick="retornarNombre(producto.nombre)">
-            Agregar al carrito
-          </button>
+    <div class="productos">
+      <% if(hayProductos){ %>
+        <%productos.forEach(function(producto){%>
+          <form  action="/productos/<%=producto._id%>" method="post">
+            <div class="card text-center" id="cards" style="width: 24rem;">
+              <img src="../../media/producto<%=producto.id%>.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title"><%=producto.nombre%></h5>
+                <p class="card-text">
+                  <ul>
+                    <li name="id">ID:<%=producto._id%> </li>
+                    <li name="nombre">Nombre: <%=producto.nombre%></li>
+                    <li name="precio">Precio: <%=producto.precio%></li>
+                  </ul>
+                </p>
+                <button type="submit" class="btn btn-primary " id="buttonToCart" onclick="retornarNombre(producto.nombre)">
+                  Agregar al carrito
+                </button>
+              </div>
+            </form>
+            
+          </div>
+          <%});%>
+          <%} else{ %>
+            <h3 class="alert alert-warning">No se encontraron productos</h3>
+            <% } %>
+          </div>
         </div>
-      </form>
-      
-        </div>
-        <%});%>
-      <%} else{ %>
-        <h3 class="alert alert-warning">No se encontraron productos</h3>
-        <% } %>
+     
     <script src="./index.js"></script>
   </body>
 </html>

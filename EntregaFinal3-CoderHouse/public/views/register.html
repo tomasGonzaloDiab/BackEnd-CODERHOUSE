@@ -13,13 +13,19 @@
     />
     <link rel="stylesheet" href="../css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
   </head>
   <body>
-    <form action="/singup" method="post">
-      <div class="form-group">
-        <label for="nombre">Nombre </label>
-        <input type="nombre" class="form-control" id="nombre" name="nombre" />
-      </div>
+    <div class="fondo">
+
+      <form action="/singup" method="post"  class="formLogin">
+        <div class="form-group">
+          <label for="nombre">Nombre </label>
+          <input type="nombre" class="form-control" id="nombre" name="nombre" />
+        </div>
       <div class="form-group">
         <label for="email">Email </label>
         <input
@@ -28,7 +34,7 @@
           id="email"
           aria-describedby="emailHelp"
           name="email"
-        />
+          />
       </div>
       <div class="form-group">
         <label for="contraseña">Contraseña</label>
@@ -37,28 +43,28 @@
           class="form-control"
           id="contraseña"
           name="contraseña"
-        />
-      </div>
+          />
+        </div>
+        <div class="form-group">
+          <label for="Edad">Edad</label>
+          <input type="number" class="form-control" id="Edad" name="edad" />
+        </div>
       <div class="form-group">
-        <label for="Edad">Edad</label>
-        <input type="number" class="form-control" id="Edad" name="edad" />
-      </div>
-      <div class="form-group">
-        <label for="numeroDeTelefono">Numero de telefono</label>
+        <label for="numDeTelefono">Numero de telefono</label>
         <input
-          type="number"
-          class="form-control"
-          id="numeroDeTelefono"
-          name="numeroDeTelefono"
+        type="tel"
+        class="form-control"
+        id="phone"
+        name="phone"
         />
       </div>
       <div class="form-group">
         <label for="direccion">Direccion</label>
         <input
-          type="text"
-          class="form-control"
-          id="direccion"
-          name="direccion"
+        type="text"
+        class="form-control"
+        id="direccion"
+        name="direccion"
         />
       </div>
       <div class="form-group">
@@ -66,14 +72,26 @@
         <input type="text" class="form-control" id="foto" name="foto" />
       </div>
       <button
-        type="submit"
-        NumeroDeTelefono
-        class="btn btn-primary"
-        id="buttonToLog"
+      type="submit"
+      
+      class="btn btn-primary"
+      id="buttonToLog"
       >
-        Submit
-      </button>
-    </form>
-    <script src="../../routes//singup.js"></script>
-  </body>
+      Submit
+    </button>
+  </form>
+</div>
+  <script src="../../routes/singup.js"></script>
+</body>
+<script>
+  const phoneInputField = document.querySelector("#phone");
+  const phoneInput = window.intlTelInput(phoneInputField, {
+    utilsScript:
+    "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    preferedCountries:["ar","co"],
+    nationalMode: true,
+    formatOnDisplay: false,
+    hiddenInput: "numDeTelefono"
+  })
+  </script>
 </html>

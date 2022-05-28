@@ -1,3 +1,22 @@
+
+.fondo{
+    background-image: url(../media/sucuFondoPri1.jpg);
+    height: 100vh;
+}
+
+.formLogin{
+    margin: auto;
+    width: 40%;
+    text-align: center;
+    padding-top: 3%;
+    color: white;
+}
+
+.formLogin label{
+    font-size: 16px;
+}
+
+
 .msjRegistrado{
     margin: auto;
     width: 40%;
@@ -6,4 +25,26 @@
     text-align: center;
     height: 250px;
     padding-top: 3%;
+}
+
+/* home */
+
+
+.fondoHome{
+    background-image: url(../media/fondoMacetas.png);
+    height: 100vh;
+
+
+}
+.productosTitulo{
+    width: 100%;
+    text-align: center;
+}
+.productos{
+    width:100%;
+    margin:auto;
+    display: grid;
+    gap: 1rem;
+    grid-auto-rows: 44rem;
+    grid-template-columns: repeat(auto-fill, minmax(22rem,1fr));
 }

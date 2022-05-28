@@ -15,9 +15,11 @@
     <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
   </head>
   <body>
-    <form action="/login" method="post">
-      <div class="form-group">
-        <label for="email">Email address</label>
+    <div class="fondo">
+      <form action="/login" method="post" class="formLogin">
+        <h1>Bienvenido! inicie sesión por favor</h1>
+        <div class="form-group ">
+          <label for="email">Email address</label>
         <input
           type="email"
           class="form-control"
@@ -26,7 +28,7 @@
           name="email"
         />
         <small id="emailHelp" class="form-text text-muted"
-          >We'll never share your email with anyone else.</small
+        >We'll never share your email with anyone else.</small
         >
       </div>
       <div class="form-group">
@@ -36,8 +38,8 @@
           class="form-control"
           id="contraseña"
           name="contraseña"
-        />
-      </div>
+          />
+        </div>
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1" />
         <label class="form-check-label" for="exampleCheck1">Check me out</label>
@@ -46,5 +48,6 @@
         Submit
       </button>
     </form>
+  </div>
   </body>
 </html>

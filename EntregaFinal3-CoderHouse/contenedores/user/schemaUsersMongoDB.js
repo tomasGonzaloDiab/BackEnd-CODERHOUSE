@@ -8,7 +8,7 @@ mongoose.connect(`${mongodb.conexion}`);
 const nombre = Joi.string().min().required();
 const email = Joi.string().min().required();
 const contraseña = Joi.string().min().required();
-const numeroDeTelefono = Joi.string().min(4).required();
+const phone = Joi.string().min(4).required();
 const foto = Joi.string().required();
 const direccion = Joi.string().min(4).required();
 const edad = Joi.number().min().required();
@@ -17,7 +17,7 @@ const usersSchema = {
   nombre,
   email,
   contraseña,
-  numeroDeTelefono,
+  phone,
   foto,
   direccion,
   edad,

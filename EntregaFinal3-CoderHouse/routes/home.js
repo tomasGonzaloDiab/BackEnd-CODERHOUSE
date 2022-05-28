@@ -1,11 +1,9 @@
-
 const { Router } = require('express')
 const path = require('path')
 const ContenedorProdMongoDB = require('../contenedores/products/productsMongoDB.js')
 const ContenedorCartMongoDB = require('../contenedores/cart/cartMongoDB.js')
-const {checkAutentication} = require('../public/js/passport.js')
-
-
+/* const {checkAutentication} = require('../public/js/passport.js')
+ */
 
 const homeRouter = new Router();
 const productos = new ContenedorProdMongoDB();
@@ -13,11 +11,7 @@ const carts = new ContenedorCartMongoDB()
 
 
 
-
-
-
-homeRouter.get("/home", checkAutentication, async (req, res) => {
-  console.log(req.sesion)
+homeRouter.get("/home", async (req, res) => {
   const listaProductos = await productos.listAll();
   res.render(path.join(process.cwd(), "/public/views/pages/home.ejs"), {
     productos: listaProductos,
@@ -49,15 +43,10 @@ homeRouter.post("/home", async (req, res) => {
 
 
 
-  function retornarNombre(nombre){
-    console.log(nombre)
-    console.log("nombre")
-    return nombre
-}
+
 
 homeRouter.post("/productos/:id", async (req, res) => {
   const carrito = await carts.listAll();
-  console.log(req.params)
   if (carrito.length === 0) {
     const newElement = {};
     await carts.crear(newElement);
@@ -69,14 +58,16 @@ homeRouter.post("/productos/:id", async (req, res) => {
   //HASTA ACA CREA EL CARRITO, O VERIFICA SI NO TENES UNO.
   const listaProductos = await productos.listAll();
   
-  const producto = {
-    id: req.id,
-    nombre: req.nombre,
-    precio: req.precio,
+  console.log(listaCarrito)
+/*   console.log(listaProductos)
+ */  const producto = {
+    id: req.params.id.id,
+    nombre: req.params.id.nombre,
+    precio: req.params.id.precio,
   };
 
-
-  const yaExiste = listaProductos.find((e) => e.nombre == producto.nombre);
+  const yaExiste = listaProductos.find((e) => e._id == req.params.id);
+  console.log(yaExiste)
   listaCarrito[0].productos.push(yaExiste);
   const cartActualizado = await carts.update(
     listaCarrito[0].id,

@@ -92,12 +92,13 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, email, contraseña, done) => {
-      const userBuscado = await User.findUser( email );
+      const usuarioBuscado = await User.findUser( email );
+      const userBuscado = usuarioBuscado[0]
       if (userBuscado.length<1) {
         console.log("NO ESTA!!!");
         return done(null, false, console.log("usuario incorrecto"));
       }else{
-        if (!bcryptjs.compareSync(contraseña, userBuscado[0].contraseña)){
+        if (!bcryptjs.compareSync(contraseña, userBuscado.contraseña)){
           return done(null, false, console.log("Incorrect Password"));
         }else{
           console.log("ESTA!!!");
@@ -109,8 +110,7 @@ passport.use(
 );
 
 passport.serializeUser((userBuscado, done) => {
-/*   console.log(userBuscado)
- */  done(null, {id:userBuscado[0].id});
+  done(null, userBuscado.id);
 });
 
 passport.deserializeUser( async(email, done) => {

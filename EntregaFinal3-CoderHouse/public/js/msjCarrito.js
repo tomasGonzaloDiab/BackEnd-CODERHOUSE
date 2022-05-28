@@ -51,11 +51,11 @@ try {
   Su compra:
   ${cart}`,
   from: "whatsapp:+14155238886", //desde twilio
-  to: "whatsapp:+5492281534787",
+  to: "whatsapp:+5492281467372",
 };
 
 try {
-  const message = await client.messages.create(options);
+  const message =  client.messages.create(options);
   console.log(message);
 } catch (error) {
   console.log(error);
@@ -63,10 +63,9 @@ try {
 
 const buttonToCart = document.getElementById("buttonToCart");
 
- */
-
-/* export { client, transporter }; */
+ 
 
 module.exports = { client, transporter };
 
-//deberia armar el metodo get del carrito para traer el cart con los carros. Tambien ver la forma de traer los datos del usuario
+/* export { client, transporter };
+deberia armar el metodo get del carrito para traer el cart con los carros. Tambien ver la forma de traer los datos del usuario  */
