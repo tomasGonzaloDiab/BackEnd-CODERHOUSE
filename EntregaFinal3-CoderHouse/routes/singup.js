@@ -7,6 +7,7 @@ const {passport} = require('../public/js/passport.js')
 
 
 
+
 const singup = new Router();
 const register = new ContenedorMongoDB();
 

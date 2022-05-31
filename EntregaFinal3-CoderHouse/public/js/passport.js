@@ -15,7 +15,7 @@ const transporter = createTransport({
   port: 587,
   auth: {
     user: "tomasdiab@gmail.com",
-    pass: "vbsciaanpdufavco",
+    pass: "yxjmuecgoyrynsid",
   },
 });
 
@@ -94,8 +94,8 @@ passport.use(
     async (req, email, contraseña, done) => {
       const usuarioBuscado = await User.findUser( email );
       const userBuscado = usuarioBuscado[0]
-      if (userBuscado.length<1) {
-      
+      console.log(userBuscado)
+      if (!userBuscado) {
         return done(null, false, console.log("usuario incorrecto"));
       }else{
         if (!bcryptjs.compareSync(contraseña, userBuscado.contraseña)){
