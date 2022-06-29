@@ -1,6 +1,4 @@
-
 const users = require('./schemaUsersMongoDB.js')
-
 
 class ContenedorMongoDB{
     constructor(){}
@@ -25,8 +23,5 @@ class ContenedorMongoDB{
           throw new Error(`Error al guardar: ${error}`);
         }
       }
-
 }
-
-
 module.exports = ContenedorMongoDB;

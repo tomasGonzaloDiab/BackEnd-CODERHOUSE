@@ -1,9 +1,4 @@
 const express = require('express')
-const app = express();
-const port = process.env.PORT || 8080;
-const cluster = require('cluster')
-const {Server:HttpServer} = require('http')
-const httpServer = new HttpServer(app)
 const login = require('../routes/login.js')
 const singup = require('../routes/singup.js')
 const homeRouter = require('../routes/home.js')
@@ -13,7 +8,12 @@ const passport = require('passport')
 const session = require('express-session')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const cluster = require('cluster')
+const {Server:HttpServer} = require('http')
 const numCPUs = require('os').cpus().length
+const app = express();
+const port = process.env.PORT || 8080;
+const httpServer = new HttpServer(app)
 const logger = require('../public/js/logger.js')
 
 
